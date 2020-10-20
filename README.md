@@ -1,2 +1,2 @@
 # haskell-coursework
-Computer Languages and Representations CA1: Functional Programming.
+Second year Computer Languages and Representations CA1: Functional Programming with Haskell.
