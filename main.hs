@@ -1,3 +1,5 @@
+import Data.Char (digitToInt)
+
 tupleToList :: (Int, Int, Int, Int, Int, Int) -> [Int]
 tupleToList (a, b, c, d, e, f)
   = [a, b, c, d, e, f]
@@ -46,6 +48,11 @@ rule4 (a, b, c, d, e, f)
     where
     r = read (show(e) ++ show(f))
 
+-- Question 1.5
+intToList :: Int -> [Int]
+intToList
+  = map digitToInt . show 
+
 main :: IO()
 main
-  = putStrLn (show (rule3 (4,9,6,3,0,7)))
+  = putStrLn (show (possibles 999998))
