@@ -28,12 +28,12 @@ rule3 (x:y:xs)
   = abs (x - y) > 2 && rule3 (y:xs)
 
 -- Question 1.4
-rule4 :: [Int] -> Bool
-rule4 [a, b, c, d, e, f]
+rule4 :: (Int, Int, Int, Int, Int, Int) -> Bool
+rule4 (a, b, c, d, e, f)
   = read (show(a) ++ show(b)) `mod` x == 0 && read (show(c) ++ show(d)) `mod` x == 0
     where
     x = read (show(e) ++ show(f))
 
 main :: IO()
 main
-  = putStrLn (show (rule4 (tupleToList (4,9,6,3,0,7))))
+  = putStrLn (show (rule4 (4,9,6,3,0,7)))
