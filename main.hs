@@ -18,6 +18,15 @@ rule2 [x]
 rule2 (x:y:xs)
   = x `mod` 2 /= y `mod` 2 && rule2 (y:xs)
 
+-- Question 1.3
+rule3 :: [Int] -> Bool
+rule3 []
+  = True
+rule3 [x]
+  = True
+rule3 (x:y:xs)
+  = abs (x - y) > 2 && rule3 (y:xs)
+
 main :: IO()
 main
-  = putStrLn (show (rule2 (tupleToList (4,9,6,3,0,7))))
+  = putStrLn (show (rule3 (tupleToList (4,9,6,3,0,7))))
