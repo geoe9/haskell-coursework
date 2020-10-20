@@ -3,37 +3,49 @@ tupleToList (a, b, c, d, e, f)
   = [a, b, c, d, e, f]
 
 -- Question 1.1
-rule1 :: [Int] -> Bool
-rule1 []
+rule1 :: (Int, Int, Int, Int, Int, Int) -> Bool
+rule1
+  = uniqueElems . tupleToList
+
+uniqueElems :: [Int] -> Bool
+uniqueElems []
   = True
-rule1 (x:xs)
-  = x `notElem` xs && rule1 xs
+uniqueElems (x:xs)
+  = x `notElem` xs && uniqueElems xs
 
 -- Question 1.2
-rule2 :: [Int] -> Bool
-rule2 []
+rule2 :: (Int, Int, Int, Int, Int, Int) -> Bool
+rule2
+  = alternatingEvens . tupleToList
+
+alternatingEvens :: [Int] -> Bool
+alternatingEvens []
   = True
-rule2 [x]
+alternatingEvens [x]
   = True
-rule2 (x:y:xs)
-  = x `mod` 2 /= y `mod` 2 && rule2 (y:xs)
+alternatingEvens (x:y:xs)
+  = x `mod` 2 /= y `mod` 2 && alternatingEvens (y:xs)
 
 -- Question 1.3
-rule3 :: [Int] -> Bool
-rule3 []
+rule3 :: (Int, Int, Int, Int, Int, Int) -> Bool
+rule3
+  = diffGreaterThanTwo . tupleToList
+
+diffGreaterThanTwo :: [Int] -> Bool
+diffGreaterThanTwo []
   = True
-rule3 [x]
+diffGreaterThanTwo [x]
   = True
-rule3 (x:y:xs)
-  = abs (x - y) > 2 && rule3 (y:xs)
+diffGreaterThanTwo (x:y:xs)
+  = abs (x - y) > 2 && diffGreaterThanTwo (y:xs)
 
 -- Question 1.4
 rule4 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule4 (a, b, c, d, e, f)
-  = read (show(a) ++ show(b)) `mod` x == 0 && read (show(c) ++ show(d)) `mod` x == 0
+  = read (show(a) ++ show(b)) `mod` r == 0 && read (show(c) ++ show(d)) `mod` r == 0
     where
-    x = read (show(e) ++ show(f))
+    r = read (show(e) ++ show(f))
 
 main :: IO()
 main
-  = putStrLn (show (rule4 (4,9,6,3,0,7)))
+  = putStrLn (show (rule3 (4,9,6,3,0,7)))
