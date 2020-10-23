@@ -49,10 +49,16 @@ rule4 (a, b, c, d, e, f)
     r = read (show(e) ++ show(f))
 
 -- Question 1.5
+-- TODO
 intToList :: Int -> [Int]
 intToList
   = map digitToInt . show 
 
+-- Question 1.6
+isSolution :: (Int, Int, Int, Int, Int, Int) -> Bool
+isSolution x
+  = rule1 x && rule2 x && rule3 x && rule4 x
+
 main :: IO()
 main
-  = putStrLn (show (possibles 999998))
+  = putStrLn (show (isSolution (4,9,6,3,0,7)))
