@@ -4,6 +4,20 @@ tupleToList :: (Int, Int, Int, Int, Int, Int) -> [Int]
 tupleToList (a, b, c, d, e, f)
   = [a, b, c, d, e, f]
 
+listToTuple :: [Int] -> (Int, Int, Int, Int, Int, Int)
+listToTuple [a]
+  = (0, 0, 0, 0, 0, a)
+listToTuple [a, b]
+  = (0, 0, 0, 0, a, b)
+listToTuple [a, b, c]
+  = (0, 0, 0, a, b, c)
+listToTuple [a, b, c, d]
+  = (0, 0, a, b, c, d)
+listToTuple [a, b, c, d, e]
+  = (0, a, b, c, d, e)
+listToTuple [a, b, c, d, e, f]
+  = (a, b, c, d, e, f)
+
 -- Question 1.1
 rule1 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule1
@@ -49,10 +63,9 @@ rule4 (a, b, c, d, e, f)
     r = read (show(e) ++ show(f))
 
 -- Question 1.5
--- TODO
-intToList :: Int -> [Int]
-intToList
-  = map digitToInt . show 
+possibles :: [(Int, Int, Int, Int, Int, Int)]
+possibles
+  = map listToTuple (map (map digitToInt . show) [0..999999])
 
 -- Question 1.6
 isSolution :: (Int, Int, Int, Int, Int, Int) -> Bool
@@ -61,4 +74,4 @@ isSolution x
 
 main :: IO()
 main
-  = putStrLn (show (isSolution (4,9,6,3,0,7)))
+  = putStrLn (show (filter isSolution possibles))
