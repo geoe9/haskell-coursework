@@ -13,7 +13,7 @@ glider
 
 createRow :: Int -> [Int] -> String
 createRow width xs
-  = [createPoint i xs | i <- [0..(width - 1)]]
+  = [createPoint i xs | i <- [0..width]]
 
 createPoint :: Int -> [Int] -> Char
 createPoint i xs
@@ -22,7 +22,7 @@ createPoint i xs
 
 gridPoints :: Int -> [Point] -> [[Int]]
 gridPoints height xs
-  = [rowPoints i xs | i <- [0..(height - 1)]]
+  = [rowPoints i xs | i <- [0..height]]
 
 rowPoints :: Int -> [Point] -> [Int]
 rowPoints i []
@@ -42,3 +42,13 @@ visualisation w h xs
 main :: IO()
 main
   = putStrLn( show (visualisation 5 5 [ glider ] ))
+
+-- Question 2.3
+evolution :: [Point] -> [[Point]]
+evolution xs
+  = [xs] -- [xs : evolve xs]
+
+-- Rules --
+-- 1. Any live cell with two or three live neighbours survives.
+-- 2. Any dead cell with three live neighbours becomes alive.
+-- 3. All other live cells die, and all other dead cells stay dead.
