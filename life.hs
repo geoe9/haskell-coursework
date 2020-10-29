@@ -1,7 +1,7 @@
 -- Question 2.1
 pretty :: [[String]] -> String
 pretty xs
-  = unlines $ concat $ xs
+  = (unlines $ concat $ xs)
 
 -- Question 2.2
 type Point
@@ -39,32 +39,36 @@ visualisation :: Int -> Int -> [[Point]] -> [[String]]
 visualisation w h xs
   = map (createGrid w h) xs
 
-main :: IO()
-main
-  = putStrLn( show (visualisation 5 5 [ glider ] ))
-
 -- Question 2.3
-evolution :: [Point] -> [[Point]]
-evolution xs
-  = [xs] -- [xs : evolve xs]
-
 livingNeighbourCount :: Point -> [Point] -> Int
 livingNeighbourCount p ps
   = length $ filter (areNeighbours p) ps
 
 areNeighbours :: Point -> Point -> Bool
 areNeighbours (a1,b1) (a2,b2)
-  = abs(a1-a2) < 2 && abs(b1-b2) < 2
-
-survivingCells :: [Point] -> [Point]
-survivingCells ps
-  = [p | p <- ps, survivingCell p ps]
+  = abs(a1-a2) < 2 && abs(b1-b2) < 2 && (a1,b1) /= (a2,b2)
 
 survivingCell :: Point -> [Point] -> Bool
 survivingCell p ps
-  = livingNeighbourCount p ps == 2 || livingNeighbourCount p ps == 3
+  = (livingNeighbourCount p ps == 2 || livingNeighbourCount p ps == 3) && p `elem` ps
 
--- Rules --
--- 1. Any live cell with two or three live neighbours survives.
--- 2. Any dead cell with three live neighbours becomes alive.
--- 3. All other live cells die, and all other dead cells stay dead.
+allCells :: Int -> Int -> [(Int, Int)]
+allCells w h
+  = [(x, y) | x <- [0..w], y <- [0..h]]
+
+newCell :: Point -> [Point] -> Bool
+newCell p ps
+  = livingNeighbourCount p ps == 3 && p `notElem` ps
+
+evolve :: [Point] -> [Point]
+evolve ps
+  = [p | p <- (allCells 5 5), (survivingCell p ps || newCell p ps)]
+
+evolution :: [Point] -> [[Point]]
+evolution ps
+  = iterate evolve ps
+
+main :: IO()
+main
+  -- =  putStrLn (pretty (take 8 (visualisation 5 5 (evolution glider))))
+  = putStrLn (show (gridPoints 5 glider))
