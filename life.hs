@@ -48,6 +48,14 @@ evolution :: [Point] -> [[Point]]
 evolution xs
   = [xs] -- [xs : evolve xs]
 
+livingNeighbourCount :: Point -> [Point] -> Int
+livingNeighbourCount p ps
+  = length $ filter (areNeighbours p) ps
+
+areNeighbours :: Point -> Point -> Bool
+areNeighbours (a1,b1) (a2,b2)
+  = abs(a1-a2) < 2 && abs(b1-b2) < 2
+
 -- Rules --
 -- 1. Any live cell with two or three live neighbours survives.
 -- 2. Any dead cell with three live neighbours becomes alive.
