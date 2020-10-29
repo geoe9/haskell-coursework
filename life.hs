@@ -1,7 +1,7 @@
 -- Question 2.1
 pretty :: [[String]] -> String
 pretty xs
-  = (unlines $ concat $ xs)
+  = unlines $ concat $ xs
 
 -- Question 2.2
 type Point
@@ -36,8 +36,8 @@ createGrid w h xs
   = map (createRow w) (gridPoints h xs)
 
 visualisation :: Int -> Int -> [[Point]] -> [[String]]
-visualisation w h xs
-  = map (createGrid w h) xs
+visualisation w h
+  = map (createGrid w h)
 
 -- Question 2.3
 livingNeighbourCount :: Point -> [Point] -> Int
@@ -56,10 +56,6 @@ allCells :: Int -> Int -> [(Int, Int)]
 allCells w h
   = [(x, y) | x <- [0..w], y <- [0..h]]
 
-possibleCells :: [Point] -> [Point]
-possibleCells ps
-  = 
-
 newCell :: Point -> [Point] -> Bool
 newCell p ps
   = livingNeighbourCount p ps == 3 && p `notElem` ps
@@ -69,10 +65,9 @@ evolve ps
   = [p | p <- (allCells 5 5), (survivingCell p ps || newCell p ps)]
 
 evolution :: [Point] -> [[Point]]
-evolution ps
-  = iterate evolve ps
+evolution
+  = iterate evolve
 
 main :: IO()
 main
-  -- =  putStrLn (pretty (take 8 (visualisation 5 5 (evolution glider))))
-  = putStrLn (show (gridPoints 5 glider))
+  =  putStrLn (pretty (take 8 (visualisation 5 5 (evolution glider))))
