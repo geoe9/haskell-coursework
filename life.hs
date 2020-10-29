@@ -11,6 +11,15 @@ glider :: [Point]
 glider
   = [(0,2),(1,3),(2,1),(2,2),(2,3)]
 
+createRow :: Int -> [Int] -> String
+createRow width xs
+  = [createPoint i xs | i <- [0..(width - 1)]]
+
+createPoint :: Int -> [Int] -> Char
+createPoint i xs
+  | i `elem` xs = '#'
+  | otherwise = '.'
+
 gridPoints :: Int -> [Point] -> [[Int]]
 gridPoints height xs
   = [rowPoints i xs | i <- [0..(height - 1)]]
@@ -25,15 +34,6 @@ rowPoints i ((a,b):xs)
 createGrid :: Int -> Int -> [Point] -> [String]
 createGrid w h xs
   = map (createRow w) (gridPoints h xs)
-
-createRow :: Int -> [Int] -> String
-createRow width xs
-  = [createPoint i xs | i <- [0..(width - 1)]]
-
-createPoint :: Int -> [Int] -> Char
-createPoint i xs
-  | i `elem` xs = '#'
-  | otherwise = '.'
 
 visualisation :: Int -> Int -> [[Point]] -> [[String]]
 visualisation w h xs
