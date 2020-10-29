@@ -56,6 +56,10 @@ allCells :: Int -> Int -> [(Int, Int)]
 allCells w h
   = [(x, y) | x <- [0..w], y <- [0..h]]
 
+possibleCells :: [Point] -> [Point]
+possibleCells ps
+  = 
+
 newCell :: Point -> [Point] -> Bool
 newCell p ps
   = livingNeighbourCount p ps == 3 && p `notElem` ps
