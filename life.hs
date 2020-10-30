@@ -25,7 +25,7 @@ gridPoints height xs
   = [rowPoints i xs | i <- [0..height]]
 
 rowPoints :: Int -> [Point] -> [Int]
-rowPoints i []
+rowPoints _ []
   = []
 rowPoints i ((a,b):xs)
   | i == b = a : (rowPoints i xs)
@@ -37,7 +37,7 @@ createGrid w h xs
 
 visualisation :: Int -> Int -> [[Point]] -> [[String]]
 visualisation w h
-  = map (createGrid w h)
+  = map $ createGrid w h
 
 -- Question 2.3
 livingNeighbourCount :: Point -> [Point] -> Int
@@ -52,9 +52,15 @@ survivingCell :: Point -> [Point] -> Bool
 survivingCell p ps
   = (livingNeighbourCount p ps == 2 || livingNeighbourCount p ps == 3) && p `elem` ps
 
-allCells :: Int -> Int -> [(Int, Int)]
-allCells w h
-  = [(x, y) | x <- [0..w], y <- [0..h]]
+possibleCells :: [Point] -> [Point]
+possibleCells xs
+  = [(x, y) | x <- [la..ha], y <- [lb..hb]]
+  where
+  (as, bs) = unzip xs
+  la = foldr1 min as - 1
+  ha = foldr1 max as + 1
+  lb = foldr1 min bs - 1
+  hb = foldr1 max bs + 1
 
 newCell :: Point -> [Point] -> Bool
 newCell p ps
@@ -62,7 +68,7 @@ newCell p ps
 
 evolve :: [Point] -> [Point]
 evolve ps
-  = [p | p <- (allCells 5 5), (survivingCell p ps || newCell p ps)]
+  = [p | p <- possibleCells ps, survivingCell p ps || newCell p ps]
 
 evolution :: [Point] -> [[Point]]
 evolution
@@ -70,4 +76,4 @@ evolution
 
 main :: IO()
 main
-  =  putStrLn (pretty (take 8 (visualisation 5 5 (evolution glider))))
+ =  putStrLn (pretty (take 8 (visualisation 5 5 (evolution glider))))
