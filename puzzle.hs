@@ -37,7 +37,7 @@ rule2
 alternatingEvens :: [Int] -> Bool
 alternatingEvens []
   = True
-alternatingEvens [x]
+alternatingEvens [_]
   = True
 alternatingEvens (x:y:xs)
   = x `mod` 2 /= y `mod` 2 && alternatingEvens (y:xs)
@@ -50,7 +50,7 @@ rule3
 diffGreaterThanTwo :: [Int] -> Bool
 diffGreaterThanTwo []
   = True
-diffGreaterThanTwo [x]
+diffGreaterThanTwo [_]
   = True
 diffGreaterThanTwo (x:y:xs)
   = abs (x - y) > 2 && diffGreaterThanTwo (y:xs)
