@@ -1,7 +1,7 @@
 # haskell-coursework
 Second year Computer Languages and Representations CA1: Functional Programming with Haskell.
 ## puzzle.hs
-Gives all solutions of a puzzle with the following rules:
+Gives all 6-digit solutions of a puzzle with the following rules:
 1. all digits are different;
 2. alternate digits are even and odd, or odd and even;
 3. alternate digits differ by more than two;
