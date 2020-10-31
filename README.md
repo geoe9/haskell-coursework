@@ -1,4 +1,4 @@
-# haskell-coursework
+# Haskell Coursework
 Second year Computer Languages and Representations CA1: Functional Programming with Haskell.
 ## puzzle.hs
 Gives all 6-digit solutions of a puzzle with the following rules:
