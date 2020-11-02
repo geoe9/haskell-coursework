@@ -59,8 +59,8 @@ diffGreaterThanTwo (x:y:xs)
 rule4 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule4 (a, b, c, d, e, f)
   = read (show(a) ++ show(b)) `mod` r == 0 && read (show(c) ++ show(d)) `mod` r == 0
-    where
-    r = read (show(e) ++ show(f))
+  where
+  r = read (show(e) ++ show(f))
 
 {-- Question 1.5 --}
 possibles :: [(Int, Int, Int, Int, Int, Int)]
@@ -70,8 +70,7 @@ possibles
 {-- Question 1.6 --}
 isSolution :: (Int, Int, Int, Int, Int, Int) -> Bool
 isSolution x
-  -- = foldr (&&) True (map ($ x) [rule1, rule2, rule3, rule4])
-  = rule1 x && rule2 x && rule3 x && rule4 x
+  = and $ map ($ x) [rule1, rule2, rule3, rule4]
 
 main :: IO()
 main
