@@ -12,8 +12,8 @@ glider
   = [(0,2),(1,3),(2,1),(2,2),(2,3)]
 
 createRow :: Int -> [Int] -> String
-createRow width xs
-  = [createPoint i xs | i <- [0..width]]
+createRow w xs
+  = [createPoint i xs | i <- [0..w]]
 
 createPoint :: Int -> [Int] -> Char
 createPoint i xs
@@ -21,8 +21,8 @@ createPoint i xs
   | otherwise = '.'
 
 gridPoints :: Int -> [Point] -> [[Int]]
-gridPoints height xs
-  = [rowPoints i xs | i <- [0..height]]
+gridPoints h xs
+  = [rowPoints i xs | i <- [0..h]]
 
 rowPoints :: Int -> [Point] -> [Int]
 rowPoints _ []
@@ -50,7 +50,9 @@ areNeighbours (a1,b1) (a2,b2)
 
 survivingCell :: Point -> [Point] -> Bool
 survivingCell p ps
-  = (livingNeighbourCount p ps == 2 || livingNeighbourCount p ps == 3) && p `elem` ps
+  = (lnc == 2 || lnc == 3) && p `elem` ps
+  where
+  lnc = livingNeighbourCount p ps
 
 possibleCells :: [Point] -> [Point]
 possibleCells xs
