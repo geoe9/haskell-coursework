@@ -18,7 +18,7 @@ listToTuple [a, b, c, d, e]
 listToTuple [a, b, c, d, e, f]
   = (a, b, c, d, e, f)
 
--- Question 1.1
+{-- Question 1.1 --}
 rule1 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule1
   = uniqueElems . tupleToList
@@ -29,7 +29,7 @@ uniqueElems []
 uniqueElems (x:xs)
   = x `notElem` xs && uniqueElems xs
 
--- Question 1.2
+{-- Question 1.2 --}
 rule2 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule2
   = alternatingEvens . tupleToList
@@ -42,7 +42,7 @@ alternatingEvens [_]
 alternatingEvens (x:y:xs)
   = x `mod` 2 /= y `mod` 2 && alternatingEvens (y:xs)
 
--- Question 1.3
+{-- Question 1.3 --}
 rule3 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule3
   = diffGreaterThanTwo . tupleToList
@@ -55,19 +55,19 @@ diffGreaterThanTwo [_]
 diffGreaterThanTwo (x:y:xs)
   = abs (x - y) > 2 && diffGreaterThanTwo (y:xs)
 
--- Question 1.4
+{-- Question 1.4 --}
 rule4 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule4 (a, b, c, d, e, f)
   = read (show(a) ++ show(b)) `mod` r == 0 && read (show(c) ++ show(d)) `mod` r == 0
     where
     r = read (show(e) ++ show(f))
 
--- Question 1.5
+{-- Question 1.5 --}
 possibles :: [(Int, Int, Int, Int, Int, Int)]
 possibles
   = map listToTuple (map (map digitToInt . show) [0..999999])
 
--- Question 1.6
+{-- Question 1.6 --}
 isSolution :: (Int, Int, Int, Int, Int, Int) -> Bool
 isSolution x
   -- = foldr (&&) True (map ($ x) [rule1, rule2, rule3, rule4])
