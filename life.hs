@@ -1,9 +1,9 @@
--- Question 2.1
+{-- Question 2.1 --}
 pretty :: [[String]] -> String
 pretty xs
   = unlines $ concat $ xs
 
--- Question 2.2
+{-- Question 2.2 --}
 type Point
   = (Int, Int)
 
@@ -39,7 +39,7 @@ visualisation :: Int -> Int -> [[Point]] -> [[String]]
 visualisation w h
   = map $ createGrid w h
 
--- Question 2.3
+{-- Question 2.3 --}
 livingNeighbourCount :: Point -> [Point] -> Int
 livingNeighbourCount p ps
   = length $ filter (areNeighbours p) ps
