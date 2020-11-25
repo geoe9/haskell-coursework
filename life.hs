@@ -1,7 +1,7 @@
 {-- Question 2.1 --}
 pretty :: [[String]] -> String
-pretty xs
-  = unlines $ concat $ xs
+pretty
+  = unlines . concat
 
 {-- Question 2.2 --}
 type Point
