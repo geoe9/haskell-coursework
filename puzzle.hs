@@ -58,9 +58,9 @@ diffGreaterThanTwo (x:y:xs)
 {-- Question 1.4 --}
 rule4 :: (Int, Int, Int, Int, Int, Int) -> Bool
 rule4 (a, b, c, d, e, f)
-  = read (show(a) ++ show(b)) `mod` r == 0 && read (show(c) ++ show(d)) `mod` r == 0
+  = (10 * a + b) `mod` r == 0 && (10 * c + d) `mod` r == 0
   where
-  r = read (show(e) ++ show(f))
+  r = 10 * e + f
 
 {-- Question 1.5 --}
 possibles :: [(Int, Int, Int, Int, Int, Int)]
