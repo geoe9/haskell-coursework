@@ -70,7 +70,7 @@ possibles
 {-- Question 1.6 --}
 isSolution :: (Int, Int, Int, Int, Int, Int) -> Bool
 isSolution x
-  = rule1 xs && rule2 xs && rule3 xs && rule4 xs
+  = rule1 x && rule2 x && rule3 x && rule4 x
 
 main :: IO()
 main
