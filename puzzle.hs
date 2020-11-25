@@ -70,7 +70,7 @@ possibles
 {-- Question 1.6 --}
 isSolution :: (Int, Int, Int, Int, Int, Int) -> Bool
 isSolution x
-  = and $ map ($ x) [rule1, rule2, rule3, rule4]
+  = rule1 && rule2 && rule3 && rule4
 
 main :: IO()
 main
